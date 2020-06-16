@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import { useNotes } from "./NotesContext";
+import { createState } from "solid-js";
 
 function App() {
+  const [textState, setTextState] = createState({noteText: ""});
+  const { state, addNote, removeNote } = useNotes();
+
   return (
-    <div class="App">
-      <header class="App-header">
-        <img src={logo} class="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          class="App-link"
-          href="https://github.com/ryansolid/solid"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Solid
-        </a>
-      </header>
-    </div>
+    <>
+      <input
+        type="text"
+        value={textState.noteText}
+        onChange={(e) => setTextState({noteText: e.target.value})}
+      />
+      <button
+        onClick={() => {
+          addNote(textState.noteText);
+          setTextState({noteText: ""});
+        }}
+      >
+        Add note
+      </button>
+      <ul>
+        {state.notes.map((note) => (
+          <li onClick={() => removeNote(note.id)} key={note.id}>
+            {note.text}
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
 
