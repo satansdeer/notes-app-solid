@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "nanoid": "^3.1.10",
+    "nanoid": "^3.1.31",
     "solid-js": "^0.18.7",
     "solid-scripts": "0.0.35"
   },
